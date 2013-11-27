@@ -1,0 +1,1 @@
+require('./app_js/app')

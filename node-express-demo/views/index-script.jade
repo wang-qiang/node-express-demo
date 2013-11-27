@@ -1,0 +1,27 @@
+script
+  $(function(){
+    var Todo = Backbone.Model.extend({});
+    var TodoList = Backbone.Collection.extend({
+      model : Todo
+    });
+    var TodoView = Backbone.View.extend({
+      initialize : function(){
+        this.$tmp = $('#template').html();
+      },
+      render : function(){
+        //var html = '<p>'+this.model.get('title')+'</p>';
+        console.log(this.model);
+        this.$el.html(_.template(this.$tmp, this.model.attributes));
+      }
+    })
+    var todo = new Todo({title:'this is todo title', description:'description of this todo', id: 1});
+
+    var todoView = new TodoView({model:todo,el:$('#temp')});
+    todoView.render();
+    console.log(todoView.el);
+  });
+
+script(type='text/template', id='template')
+  h2 <%= title %>
+  hr
+  p <%= description %>
